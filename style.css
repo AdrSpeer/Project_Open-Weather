@@ -1,0 +1,53 @@
+/* Basics */
+
+* {
+  margin: 0;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: clamp(3rem, 4vw, 5rem);
+}
+h2 {
+  font-size: clamp(2.5rem, 3vw, 3.5rem);
+}
+h3 {
+  font-size: clamp(2.1rem, 2.7vw, 3rem);
+}
+h4 {
+  font-size: clamp(1.9rem, 2.2vw, 2.5rem);
+}
+
+p,
+label {
+  font-size: clamp(1.7rem, 1.7vw, 1.7rem);
+}
+a {
+  font-size: clamp(1.7rem, 1.7vw, 1.7rem);
+  text-decoration: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.search-box img {
+  width: 1vw;
+  height: 1vw;
+  cursor: pointer;
+}
+.search-box input {
+  margin-right: 1vw;
+}
