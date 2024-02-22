@@ -1,6 +1,7 @@
 const cityName = document.querySelector("#inputCity");
 const headlineBox = document.querySelector(".headline-box");
 const middleBox = document.querySelector(".middle-box");
+const lowerBox = document.querySelector(".lower-box");
 
 const weatherData = () => {
   fetch(
@@ -17,6 +18,9 @@ const weatherData = () => {
           .then((res) => res.json())
           .then((weatherData) => {
             console.log(weatherData);
+            // Clear
+            headlineBox.innerHTML = "";
+            middleBox.innerHTML = "";
             // ! headlineBox !
             // Location
             let location = document.createElement("h3");
@@ -28,7 +32,7 @@ const weatherData = () => {
             )
               .then((res) => res.json())
               .then((timeData) => {
-                let time = document.createElement("h6");
+                let time = document.createElement("p");
                 let localTime = new Date(timeData.localTime);
                 let localTimeNew = localTime.toLocaleTimeString();
                 let today = new Date();
@@ -55,9 +59,35 @@ const weatherData = () => {
             let temMaxRounded = Math.round(weatherData.main.temp_max);
             tempMinMax.textContent = `Max: ${temMaxRounded}°C ↑ Min: ${temMinRounded}°C ↓ `;
             middleBox.appendChild(tempMinMax);
+            // Description
+            let description = document.createElement("h5");
+            let descriptionWeather = weatherData.weather[0].description;
+            description.textContent = descriptionWeather;
+            middleBox.appendChild(description);
+            // ! lowerBox !
+            // Wind Speed
+            let wind = document.createElement("p");
+            let windOutput = weatherData.wind.speed;
+            wind.textContent = `Wind speed: ${windOutput} m/s`;
+            lowerBox.appendChild(wind);
+            // Pressure
+            let pressure = document.createElement("p");
+            let pressureOutput = weatherData.main.pressure;
+            pressure.textContent = `Pressure: ${pressureOutput} hPa`;
+            lowerBox.appendChild(pressure);
+            // Humidity
+            let humidity = document.createElement("p");
+            let humidityOutput = weatherData.main.humidity;
+            humidity.textContent = `Humidity: ${humidityOutput} %`;
+            lowerBox.appendChild(humidity);
+            // Cloudiness
+            let clouds = document.createElement("p");
+            let cloudsOutput = weatherData.clouds.all;
+            clouds.textContent = `Cloudiness: ${cloudsOutput} %`;
+            lowerBox.appendChild(clouds);
           })
           .catch((err) =>
-            console.error("Error loading current Weather-API", err)
+            console.log("Error loading current Weather-API", err)
           );
       });
     })
