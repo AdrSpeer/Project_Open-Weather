@@ -64,6 +64,9 @@ label {
   padding: 2vw;
   margin-bottom: 5vw;
   border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-box img {
