@@ -1,3 +1,4 @@
+// HTML
 const cityName = document.querySelector("#inputCity");
 const headlineBox = document.querySelector(".headline-box");
 const middleBox = document.querySelector(".middle-box");
@@ -9,6 +10,15 @@ const thirdDayBox = document.querySelector(".third-day");
 const fourthDayBox = document.querySelector(".fourth-day");
 const fifthDayBox = document.querySelector(".fifth-day");
 
+
+// Wert des Inputfelds auf die Standardstadt, die beim Laden der Seite aufgerufen wird
+const defaultCity = "Donaueschingen";
+document.addEventListener("DOMContentLoaded", function () {
+  cityName.value = defaultCity; 
+  weatherData(); 
+});
+
+// Suche nach Städten und darstellung
 const weatherData = () => {
   fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&appid=fe27144da2058b8443d8d23a65412380`
@@ -28,6 +38,11 @@ const weatherData = () => {
             headlineBox.innerHTML = "";
             middleBox.innerHTML = "";
             lowerBox.innerHTML = "";
+            firstDayBox.innerHTML = "";
+            secondDayBox.innerHTML = "";
+            thirdDayBox.innerHTML = "";
+            fourthDayBox.innerHTML = "";
+            fifthDayBox.innerHTML = "";
             // ! headlineBox !
             // Location
             let location = document.createElement("h3");
@@ -86,7 +101,9 @@ const weatherData = () => {
             );
             let sunriseHours = sunriseOutput.getHours();
             sunriseHours -= 1;
-            let sunriseMinutes = sunriseOutput.getMinutes();
+            let sunriseMinutes =
+              (sunriseOutput.getMinutes() < 10 ? "0" : "") +
+              sunriseOutput.getMinutes();
             sunrise.textContent = `🌅 Sunrise: ${sunriseHours}:${sunriseMinutes} `;
             lowerBox.appendChild(sunrise);
             // Sunset
@@ -96,7 +113,9 @@ const weatherData = () => {
             );
             let sunsetHours = sunsetOutput.getHours();
             sunsetHours -= 1;
-            let sunsetMinutes = sunsetOutput.getMinutes();
+            let sunsetMinutes =
+              (sunsetOutput.getMinutes() < 10 ? "0" : "") +
+              sunsetOutput.getMinutes();
             sunset.textContent = `🌇 Sunset: ${sunsetHours}:${sunsetMinutes} `;
             lowerBox.appendChild(sunset);
             // Pressure
@@ -134,12 +153,6 @@ const weatherData = () => {
                 });
                 outputDateDay1.textContent = dateDay1New;
                 firstDayBox.appendChild(outputDateDay1);
-                // Day 1 - Description
-                let outputDescriptionDay1 = document.createElement("p");
-                let descriptionDay1 =
-                  forecastData.list[7].weather[0].description;
-                outputDescriptionDay1.textContent = descriptionDay1;
-                firstDayBox.appendChild(outputDescriptionDay1);
                 // Day 1 - Icon
                 let forecastIconDay1 = document.createElement("img");
                 firstDayBox.appendChild(forecastIconDay1);
@@ -159,12 +172,6 @@ const weatherData = () => {
                 });
                 outputDateDay2.textContent = dateDay2New;
                 secondDayBox.appendChild(outputDateDay2);
-                // Day 2 - Description
-                let outputDescriptionDay2 = document.createElement("p");
-                let descriptionDay2 =
-                  forecastData.list[15].weather[0].description;
-                outputDescriptionDay2.textContent = descriptionDay2;
-                secondDayBox.appendChild(outputDescriptionDay2);
                 // Day 2 - Icon
                 let forecastIconDay2 = document.createElement("img");
                 secondDayBox.appendChild(forecastIconDay2);
@@ -184,12 +191,6 @@ const weatherData = () => {
                 });
                 outputDateDay3.textContent = dateDay3New;
                 thirdDayBox.appendChild(outputDateDay3);
-                // Day 3 - Description
-                let outputDescriptionDay3 = document.createElement("p");
-                let descriptionDay3 =
-                  forecastData.list[23].weather[0].description;
-                outputDescriptionDay3.textContent = descriptionDay3;
-                thirdDayBox.appendChild(outputDescriptionDay3);
                 // Day 3 - Icon
                 let forecastIconDay3 = document.createElement("img");
                 thirdDayBox.appendChild(forecastIconDay3);
@@ -209,12 +210,6 @@ const weatherData = () => {
                 });
                 outputDateDay4.textContent = dateDay4New;
                 fourthDayBox.appendChild(outputDateDay4);
-                // Day 4 - Description
-                let outputDescriptionDay4 = document.createElement("p");
-                let descriptionDay4 =
-                  forecastData.list[31].weather[0].description;
-                outputDescriptionDay4.textContent = descriptionDay4;
-                fourthDayBox.appendChild(outputDescriptionDay4);
                 // Day 4 - Icon
                 let forecastIconDay4 = document.createElement("img");
                 fourthDayBox.appendChild(forecastIconDay4);
@@ -234,12 +229,6 @@ const weatherData = () => {
                 });
                 outputDateDay5.textContent = dateDay5New;
                 fifthDayBox.appendChild(outputDateDay5);
-                // Day 5 - Description
-                let outputDescriptionDay5 = document.createElement("p");
-                let descriptionDay5 =
-                  forecastData.list[39].weather[0].description;
-                outputDescriptionDay5.textContent = descriptionDay5;
-                fifthDayBox.appendChild(outputDescriptionDay5);
                 // Day 5 - Icon
                 let forecastIconDay5 = document.createElement("img");
                 fifthDayBox.appendChild(forecastIconDay5);
