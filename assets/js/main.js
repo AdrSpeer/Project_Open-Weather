@@ -9,13 +9,28 @@ const secondDayBox = document.querySelector(".second-day");
 const thirdDayBox = document.querySelector(".third-day");
 const fourthDayBox = document.querySelector(".fourth-day");
 const fifthDayBox = document.querySelector(".fifth-day");
+const toggleBtn = document.querySelector("#toggleBtn");
+const darkLight = document.querySelector(".wrapper");
 
+// Dark Light Modus
+let darkMode = true;
+toggleBtn.addEventListener("click", function () {
+  darkMode = !darkMode;
+
+  if (darkMode) {
+    darkLight.classList.add("dark-mode");
+    darkLight.classList.remove("wrapper");
+  } else {
+    darkLight.classList.remove("dark-mode");
+    darkLight.classList.add("wrapper");
+  }
+});
 
 // Wert des Inputfelds auf die Standardstadt, die beim Laden der Seite aufgerufen wird
 const defaultCity = "Donaueschingen";
 document.addEventListener("DOMContentLoaded", function () {
-  cityName.value = defaultCity; 
-  weatherData(); 
+  cityName.value = defaultCity;
+  weatherData();
 });
 
 // Suche nach Städten und darstellung
